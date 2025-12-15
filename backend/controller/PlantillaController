@@ -1,0 +1,45 @@
+package com.practica.backend.controller;
+
+import com.practica.backend.entity.Plantilla;
+import com.practica.backend.service.PlantillaService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/plantillas")
+public class PlantillaController {
+
+    private final PlantillaService service;
+
+    public PlantillaController(PlantillaService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Plantilla> getAll() {
+        return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Plantilla> getById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    @PostMapping
+    public Plantilla create(@RequestBody Plantilla plantilla) {
+        return service.save(plantilla);
+    }
+
+    @PutMapping("/{id}")
+    public Plantilla update(@PathVariable Long id, @RequestBody Plantilla plantilla) {
+        plantilla.setId(id);
+        return service.save(plantilla);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.deleteById(id);
+    }
+}

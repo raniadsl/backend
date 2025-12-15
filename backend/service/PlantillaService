@@ -1,0 +1,34 @@
+package com.practica.backend.service;
+
+import com.practica.backend.entity.Plantilla;
+import com.practica.backend.repository.PlantillaRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class PlantillaService {
+
+    private final PlantillaRepository repository;
+
+    public PlantillaService(PlantillaRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<Plantilla> findAll() {
+        return repository.findAll();
+    }
+
+    public Optional<Plantilla> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public Plantilla save(Plantilla plantilla) {
+        return repository.save(plantilla);
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+}
